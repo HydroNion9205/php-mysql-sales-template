@@ -56,8 +56,8 @@ CREATE TABLE products (
     Price DECIMAL(12,2) NOT NULL DEFAULT 0,
     StockQuantity INT NOT NULL DEFAULT 0,
     IsActive BOOLEAN NOT NULL DEFAULT TRUE,
-    SupplierID INT,
-    CategoryID INT,
+    SupplierID INT NOT NULL,
+    CategoryID INT NOT NULL,
 
     CONSTRAINT chk_products_price CHECK (Price >= 0),
     CONSTRAINT chk_products_stock CHECK (StockQuantity >= 0),
@@ -88,9 +88,9 @@ CREATE TABLE product_images (
 CREATE TABLE orders (
     OrderID INT AUTO_INCREMENT PRIMARY KEY,
     OrderDate DATE NOT NULL,
-    CustomerID INT,
-    EmployeeID INT,
-    ShipperID INT,
+    CustomerID INT NOT NULL,
+    EmployeeID INT NOT NULL,
+    ShipperID INT NOT NULL,
 
     CONSTRAINT fk_orders_customer
         FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID),

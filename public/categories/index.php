@@ -26,7 +26,7 @@ require_once '/var/www/src/includes/navbar.php';
 
         <h2>Quản lý danh mục</h2>
 
-        <a href="#" class="btn btn-primary">
+        <a href="/categories/create.php" class="btn btn-primary">
             Thêm danh mục
         </a>
 

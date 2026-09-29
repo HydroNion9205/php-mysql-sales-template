@@ -39,13 +39,13 @@ INSERT INTO products
     (ProductCode, ProductName, Description, Unit, Price,
      StockQuantity, IsActive, SupplierID, CategoryID)
 VALUES
-    ('SP001', 'Điện thoại Smartphone A',
+    ('SP001', 'Điện thoại Smartphone Xiaomi 18 Promax',
      'Điện thoại thông minh màn hình lớn, phù hợp nhu cầu sử dụng hằng ngày.',
      'Chiếc', 8500000.00, 20, TRUE, 1, 1),
-    ('SP002', 'Laptop B',
+    ('SP002', 'Laptop Lenovo Legion 7',
      'Máy tính xách tay phục vụ học tập và làm việc.',
      'Chiếc', 18500000.00, 10, TRUE, 2, 2),
-    ('SP003', 'Chuột không dây C',
+    ('SP003', 'Chuột không dây Logitech',
      'Chuột không dây nhỏ gọn, kết nối ổn định.',
      'Chiếc', 450000.00, 50, TRUE, 2, 3);
 
@@ -53,9 +53,9 @@ INSERT INTO product_images
     (ProductID, ImageFile, AltText, IsPrimary, SortOrder)
 VALUES
     (1, 'phone-a-1.jpg', 'Điện thoại Smartphone A - ảnh chính', TRUE, 1),
-    (1, 'phone-a-2.jpg', 'Điện thoại Smartphone A - mặt sau', FALSE, 2),
-    (2, 'laptop-b-1.jpg', 'Laptop B - ảnh chính', TRUE, 1),
-    (3, 'mouse-c-1.jpg', 'Chuột không dây C - ảnh chính', TRUE, 1);
+    (1, 'phone-a-2.jpg', 'Điện thoại Smartphone A - phụ kiện', FALSE, 2),
+    (2, 'laptop-b-1.webp', 'Laptop Lenovo Legion 7 - ảnh chính', TRUE, 1),
+    (3, 'mouse-c-1.webp', 'Chuột không dây Logitech - ảnh chính', TRUE, 1);
 
 INSERT INTO orders (OrderDate, CustomerID, EmployeeID, ShipperID)
 VALUES
