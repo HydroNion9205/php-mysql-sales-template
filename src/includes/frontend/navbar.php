@@ -16,6 +16,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Trang chủ</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products.php">
+                        Sản phẩm
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
