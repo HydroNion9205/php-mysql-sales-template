@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 unlink($filePath);
             }
 
-            header('Location: /products/edit.php?id=' . $productID . '&image_deleted=1');
+            header('Location: /admin/products/edit.php?id=' . $productID . '&image_deleted=1');
             exit;
 
         } catch (Throwable $e) {
@@ -272,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmtInsertImage->close();
                     $conn->commit();
 
-                    header('Location: /products/edit.php?id=' . $productID . '&images_added=1');
+                    header('Location: /admin/products/edit.php?id=' . $productID . '&images_added=1');
                     exit;
 
                 } catch (Throwable $e) {
@@ -327,7 +327,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $conn->commit();
 
-            header('Location: /products/edit.php?id=' . $productID . '&primary_updated=1');
+            header('Location: /admin/products/edit.php?id=' . $productID . '&primary_updated=1');
             exit;
 
         } catch (Throwable $e) {
@@ -393,7 +393,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
 
             if ($stmt->execute()) {
-                header('Location: /products/');
+                header('Location: /admin/products/');
                 exit;
             }
 
@@ -428,8 +428,8 @@ $currentIsActive = ($_SERVER['REQUEST_METHOD'] === 'POST')
     ? (isset($_POST['is_active']) ? 1 : 0)
     : (int) $product['IsActive'];
 
-require_once '/var/www/src/includes/header.php';
-require_once '/var/www/src/includes/navbar.php';
+require_once '/var/www/src/includes/admin/header.php';
+require_once '/var/www/src/includes/admin/navbar.php';
 ?>
 
 <div class="container mt-4">
@@ -621,7 +621,7 @@ require_once '/var/www/src/includes/navbar.php';
                                         class="btn btn-outline-primary btn-sm mb-1"
                                         name="set_primary_image"
                                         value="<?= $image['ProductImageID'] ?>"
-                                        formaction="/products/edit.php?id=<?= $productID ?>"
+                                        formaction="/admin/products/edit.php?id=<?= $productID ?>"
                                         formmethod="post"
                                     >
                                         Đặt làm ảnh chính
@@ -633,7 +633,7 @@ require_once '/var/www/src/includes/navbar.php';
                                     class="btn btn-outline-danger btn-sm mb-1"
                                     name="delete_image"
                                     value="<?= $image['ProductImageID'] ?>"
-                                    formaction="/products/edit.php?id=<?= $productID ?>"
+                                    formaction="/admin/products/edit.php?id=<?= $productID ?>"
                                     formmethod="post"
                                     onclick="return confirm('Bạn có chắc muốn xóa ảnh này?');"
                                 >
@@ -675,10 +675,10 @@ require_once '/var/www/src/includes/navbar.php';
         <hr class="my-4">
 
         <button type="submit" class="btn btn-warning">Cập nhật sản phẩm</button>
-        <a href="/products/" class="btn btn-secondary">Hủy</a>
+        <a href="/admin/products/" class="btn btn-secondary">Hủy</a>
     </form>
 </div>
 
 <?php
-require_once '/var/www/src/includes/footer.php';
+require_once '/var/www/src/includes/admin/footer.php';
 $conn->close();

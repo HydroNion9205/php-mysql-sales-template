@@ -1,18 +1,15 @@
 <?php
-$appName = "Hệ thống quản lý bán hàng";
+$pageTitle = 'Trang chủ';
+require_once '/var/www/src/includes/frontend/header.php';
+require_once '/var/www/src/includes/frontend/navbar.php';
 ?>
 
-<!doctype html>
-<html lang="vi">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $appName ?></title>
-</head>
-<body>
+<main class="container py-5">
+    <h1>Hệ thống quản lý bán hàng</h1>
+    <p class="text-muted">
+        Ứng dụng PHP và MySQL đang hoạt động.
+    </p>
+</main>
 
-    <h1><?= $appName ?></h1>
-    <p>Ứng dụng PHP đang hoạt động.</p>
-
-</body>
-</html>
+<?php
+require_once '/var/www/src/includes/frontend/footer.php';
