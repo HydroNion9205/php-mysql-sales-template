@@ -1,4 +1,5 @@
 <?php
+require_once '/var/www/src/config/session.php';
 require_once '/var/www/src/config/database.php';
 
 $productID = isset($_GET['id'])
@@ -43,6 +44,33 @@ $stmt->close();
 if (!$product) {
     header('Location: /products.php');
     exit;
+}
+
+$cartMessage = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $quantity = isset($_POST['quantity'])
+        ? (int) $_POST['quantity']
+        : 1;
+
+    if ($quantity < 1) {
+        $quantity = 1;
+    }
+
+    $stockQuantity = (int) $product['StockQuantity'];
+
+    if ($stockQuantity <= 0) {
+        $cartMessage = 'Sản phẩm hiện đã hết hàng.';
+    } else {
+        $currentQuantity = $_SESSION['cart'][$productID] ?? 0;
+        $newQuantity = $currentQuantity + $quantity;
+
+        if ($newQuantity > $stockQuantity) {
+            $newQuantity = $stockQuantity;
+        }
+
+        $_SESSION['cart'][$productID] = $newQuantity;
+        $cartMessage = 'Đã thêm sản phẩm vào giỏ hàng.';
+    }
 }
 
 $sqlImages = "
@@ -158,6 +186,47 @@ require_once '/var/www/src/includes/frontend/navbar.php';
                 <dt class="col-sm-4">Tồn kho</dt>
                 <dd class="col-sm-8"><?= (int) $product['StockQuantity'] ?></dd>
             </dl>
+
+            <?php if ($cartMessage !== ''): ?>
+                <div class="alert alert-info">
+                    <?= htmlspecialchars($cartMessage) ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ((int) $product['StockQuantity'] > 0): ?>
+                <form method="post" class="mb-4">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-auto">
+                            <label for="quantity" class="form-label">
+                                Số lượng
+                            </label>
+                            <input
+                                type="number"
+                                name="quantity"
+                                id="quantity"
+                                class="form-control"
+                                value="1"
+                                min="1"
+                                max="<?= (int) $product['StockQuantity'] ?>"
+                                style="width: 100px;"
+                            >
+                        </div>
+                        <div class="col-auto">
+                            <button
+                                type="submit"
+                                name="add_to_cart"
+                                class="btn btn-primary"
+                            >
+                                Thêm vào giỏ hàng
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            <?php else: ?>
+                <div class="alert alert-warning">
+                    Sản phẩm hiện đã hết hàng.
+                </div>
+            <?php endif; ?>
 
             <?php if (!empty($product['Description'])): ?>
                 <hr>
