@@ -214,9 +214,12 @@ require_once '/var/www/src/includes/frontend/navbar.php';
             </div>
         </form>
 
-        <div class="mt-4">
+        <div class="d-flex justify-content-between align-items-center mt-4">
             <a href="/products.php" class="btn btn-outline-secondary">
                 Tiếp tục mua hàng
+            </a>
+            <a href="/checkout.php" class="btn btn-success">
+                Tiến hành đặt hàng
             </a>
         </div>
     <?php endif; ?>

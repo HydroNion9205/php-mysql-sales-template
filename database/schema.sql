@@ -26,7 +26,8 @@ CREATE TABLE customers (
     Address VARCHAR(200),
     City VARCHAR(100),
     PostalCode VARCHAR(20),
-    Country VARCHAR(100)
+    Country VARCHAR(100),
+    Phone VARCHAR(20)
 ) CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
@@ -87,17 +88,24 @@ CREATE TABLE product_images (
 
 CREATE TABLE orders (
     OrderID INT AUTO_INCREMENT PRIMARY KEY,
-    OrderDate DATE NOT NULL,
+    OrderDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    TotalAmount DECIMAL(12,2) NOT NULL DEFAULT 0,
+    Status VARCHAR(30) NOT NULL DEFAULT 'Pending',
     CustomerID INT NOT NULL,
-    EmployeeID INT NOT NULL,
-    ShipperID INT NOT NULL,
+    EmployeeID INT,
+    ShipperID INT,
 
+    CONSTRAINT chk_orders_total
+        CHECK (TotalAmount >= 0),
     CONSTRAINT fk_orders_customer
-        FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID),
+        FOREIGN KEY (CustomerID)
+        REFERENCES customers(CustomerID),
     CONSTRAINT fk_orders_employee
-        FOREIGN KEY (EmployeeID) REFERENCES employees(EmployeeID),
+        FOREIGN KEY (EmployeeID)
+        REFERENCES employees(EmployeeID),
     CONSTRAINT fk_orders_shipper
-        FOREIGN KEY (ShipperID) REFERENCES shippers(ShipperID)
+        FOREIGN KEY (ShipperID)
+        REFERENCES shippers(ShipperID)
 ) CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
